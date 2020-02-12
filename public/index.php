@@ -1,5 +1,6 @@
 <?php 
-require_once('functions.php');
+require_once('../private/initialize.php'); 
+
 $errors = [];   
 $username = '';
 $password = '';
@@ -114,10 +115,10 @@ if(is_post_request()) {
           <!-- /.social-auth-links -->
 
           <p class="mb-1">
-            <a href="forgot-password.html">I forgot my password</a>
+            <a href="forgot-password.php">I forgot my password</a>
           </p>
           <p class="mb-0">
-            <a href="register.html" class="text-center"
+            <a href="register.php" class="text-center"
               >Register a new membership</a
             >
           </p>
@@ -126,12 +127,6 @@ if(is_post_request()) {
       </div>
     </div>
     <!-- /.login-box -->
-
-    <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="dist/js/adminlte.min.js"></script>
+    <?php require_once('../private/shared/cmn_scripts.php'); ?>
   </body>
 </html>

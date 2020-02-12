@@ -1,7 +1,4 @@
-<?php 
-require_once('initialize.php'); 
-?>
-    
+   
     <!-- jQuery -->
     <script src= <?php echo(url_for("/plugins/jquery/jquery.min.js"))?>></script>
 
@@ -57,4 +54,6 @@ require_once('initialize.php');
     
     <!-- AdminLTE for demo purposes -->
     <script src=<?php echo(url_for("dist/js/demo.js"))?>></script>
+
+  
 

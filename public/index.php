@@ -1,5 +1,5 @@
 <?php 
-require_once('../private/functions.php');
+require_once('functions.php');
 $errors = [];   
 $username = '';
 $password = '';

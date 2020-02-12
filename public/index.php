@@ -56,7 +56,7 @@ if(is_post_request()) {
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="staff/admin/cashier.html"><b>Velvet</b>POS</a>
+        <a href="staff/admin/cashier.php"><b>Velvet</b>POS</a>
       </div>
       <!-- /.login-logo -->
       <div class="card">

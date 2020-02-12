@@ -31,7 +31,7 @@
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="cashier.html"><b>Velvet</b>POS</a>
+        <a href="cashier.php"><b>Velvet</b>POS</a>
       </div>
       <!-- /.login-logo -->
       <div class="card">
@@ -41,7 +41,7 @@
             password now.
           </p>
 
-          <form action="index.html" method="post">
+          <form action="index.php" method="post">
             <div class="input-group mb-3">
               <input
                 type="password"
@@ -77,7 +77,7 @@
           </form>
 
           <p class="mt-3 mb-1">
-            <a href="index.html">Login</a>
+            <a href="index.php">Login</a>
           </p>
         </div>
         <!-- /.login-card-body -->

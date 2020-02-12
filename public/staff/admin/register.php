@@ -31,14 +31,14 @@
   <body class="hold-transition register-page">
     <div class="register-box">
       <div class="register-logo">
-        <a href="../../index2.html"><b>Velvet</b>POS</a>
+        <a href="../../index2.php"><b>Velvet</b>POS</a>
       </div>
 
       <div class="card">
         <div class="card-body register-card-body">
           <p class="login-box-msg">Register a new membership</p>
 
-          <form action="../../index.html" method="post">
+          <form action="../../index.php" method="post">
             <div class="input-group mb-3">
               <input type="text" class="form-control" placeholder="Full name" />
               <div class="input-group-append">
@@ -113,7 +113,7 @@
             </a>
           </div>
 
-          <a href="index.html" class="text-center"
+          <a href="index.php" class="text-center"
             >I already have a membership</a
           >
         </div>

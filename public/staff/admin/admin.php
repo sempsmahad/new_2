@@ -19,7 +19,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="admin.html" class="nav-link">Home</a>
+                    <a href="admin.php" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
@@ -138,7 +138,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="admin.html" class="brand-link">
+            <a href="admin.php" class="brand-link">
                 <img src=<?php echo(url_for("dist/img/AdminLTELogo.png"))?> alt="VelvetPOS Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">VelvetPOS</span>
             </a>
@@ -166,7 +166,7 @@
                         <li class="nav-header">EXAMPLES</li>
 
                         <li class="nav-item">
-                            <a href="admin.html" class="nav-link">
+                            <a href="admin.php" class="nav-link">
                                 <i class="nav-icon far fa-image"></i>
                                 <p>
                                     Admins
@@ -174,7 +174,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="cashier.html" class="nav-link">
+                            <a href="cashier.php" class="nav-link">
                                 <i class="nav-icon far fa-image"></i>
                                 <p>
                                     Cashiers
@@ -182,7 +182,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="manager.html" class="nav-link">
+                            <a href="manager.php" class="nav-link">
                                 <i class="nav-icon far fa-image"></i>
                                 <p>
                                     Managers
@@ -190,7 +190,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="stock.html" class="nav-link">
+                            <a href="stock.php" class="nav-link">
                                 <i class="nav-icon far fa-image"></i>
                                 <p>
                                     stock
@@ -198,7 +198,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="preferences.html" class="nav-link">
+                            <a href="preferences.php" class="nav-link">
                                 <i class="nav-icon far fa-image"></i>
                                 <p>
                                     preferences
@@ -697,6 +697,9 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script> 
     <?php require_once('../../../private/shared/cmn_scripts.php'); ?>
 
     <script>

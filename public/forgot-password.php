@@ -10,7 +10,7 @@
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="../../index2.html"><b>Velvet</b>POS</a>
+        <a href="../../index2.php"><b>Velvet</b>POS</a>
       </div>
       <!-- /.login-logo -->
       <div class="card">
@@ -20,7 +20,7 @@
             password.
           </p>
 
-          <form action="recover-password.html" method="post">
+          <form action="recover-password.php" method="post">
             <div class="input-group mb-3">
               <input type="email" class="form-control" placeholder="Email" />
               <div class="input-group-append">

@@ -1,15 +1,7 @@
 <?php
 require_once('./private/initialize.php');
-redirect_to(url_for('/index.php'));
+$index_end = strpos($_SERVER['SCRIPT_NAME'], '/new') + 4;
+$fake_root = substr($_SERVER['SCRIPT_NAME'], 0, $index_end);
+header("Location: " . $fake_root . '/public/index.php' );
+exit;
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>

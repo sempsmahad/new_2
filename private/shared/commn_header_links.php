@@ -49,5 +49,16 @@
 
         <!-- Tempusdominus Bbootstrap 4 -->
     <link rel="stylesheet" href=<?php echo(url_for("/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css"))?>>
+   
+    <!-- Date picker -->
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+<!-- select2 -->
+    <link rel="stylesheet" href=<?php echo(url_for("/plugins/select2/css/select2.min.css"))?>>
+    <link rel="stylesheet" href=<?php echo(url_for("/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css"))?>>
+
+<!--bootstrap duallist-->
+    <link rel="stylesheet" href=<?php echo(url_for("/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css"))?>>
 </head>
 

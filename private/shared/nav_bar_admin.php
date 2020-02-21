@@ -7,9 +7,16 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="admin.php" class="nav-link">Home</a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
-                </li>
+                <li class="nav-item dropdown">
+        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Create User
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href=<?php echo(url_for('/staff/admin/new.php'))?>>Admin</a>
+          <a class="dropdown-item" href=<?php echo(url_for('/staff/manager/new.php'))?>>manager</a>
+          <a class="dropdown-item" href=<?php echo(url_for('/staff/cashier/new.php'))?>>cashier</a>          
+        </div>
+      </li>              
             </ul>
 
             <!-- SEARCH FORM -->

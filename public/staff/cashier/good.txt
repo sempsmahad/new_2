@@ -223,7 +223,13 @@ admin given permissions
 3.allow manager to create cashier/manager  
 4.allow changing of currency
 
-
+States
+--------------------------------------------------------------------
+1.graphs of sales against time(day,week,month)
+2.most sold products 
+3.least sold products
+4.about to expire alert 
+5.profit per time
 
 functions
 ----------------------------------------------------------

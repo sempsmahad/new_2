@@ -60,5 +60,8 @@
 
 <!--bootstrap duallist-->
     <link rel="stylesheet" href=<?php echo(url_for("/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css"))?>>
+
+      <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href=<?php echo(url_for("plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css"))?>>
 </head>
 

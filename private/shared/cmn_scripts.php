@@ -57,6 +57,7 @@
 
     <!-- bs-custom-file-input -->
 <script src=<?php echo(url_for("plugins/bs-custom-file-input/bs-custom-file-input.min.js"))?>></script>
+
 <!-- Bootstrap switch -->
 <script src=<?php echo(url_for("plugins/bootstrap-switch/js/bootstrap-switch.min.js"))?>></script>
 
@@ -69,6 +70,9 @@
 
 <!-- Select2 -->
 <script src=<?php echo(url_for("plugins/select2/js/select2.full.min.js"))?>></script>
+
+<!-- bootstrap color picker -->
+<script src="../../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 
   
 

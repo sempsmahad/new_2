@@ -52,6 +52,18 @@ if(is_post_request()) {
 </div>
 </div>
 <div class="form-group row">
+<label for="stockCategory" class="col-sm-1 col-form-label">category</label>
+<div class="col-sm-3">
+<input type="text" class="form-control" name="name" id="stockCategory" placeholder="category">
+</div>
+</div>
+<div class="form-group row">
+<label for="unitPrice" class="col-sm-1 col-form-label">unit price</label>
+<div class="col-sm-3">
+<input type="text" class="form-control" name="name" id="unitPrice" placeholder="unit price">
+</div>
+</div>
+<div class="form-group row">
 <label for="stockQty" class="col-sm-1 col-form-label">quantity</label>
 <div class="col-sm-3">
 <input type="number" class="form-control" name="quantity" id="stockQty" placeholder="quantity">
@@ -75,16 +87,11 @@ if(is_post_request()) {
       <input type="date" class="form-control datepicker" name="expiry_day" id="goodB4" placeholder="expiry day">   
   </div>
 </div>
-<div class="form-group row">
-<label for="availability" class="col-sm-1 col-form-label">available</label>
-<div class="col-sm-3">
-<input type="number" class="form-control" name="remaining" id="availability" placeholder="available">
-</div>
-</div>
+
 <div class="form-group row">
 <label for="image_path" class="col-sm-1 col-form-label">image</label>
 <div class="col-sm-3">
-<input type="text" class="form-control" name="image" id="image_path" placeholder="image">
+<input type="button" class="form-control" name="image" id="image_path" placeholder="image">
 </div>
 </div>
 <div class="form-group row">
@@ -96,61 +103,7 @@ if(is_post_request()) {
 <button type="submit">submit</button>
 </form>
 </div>
-<form  enctype="multipart/form-data" action="new_stock.php" id="quickForm" role="form" class="form-horizontal">
-                <div class="card-body">
-                <div class="form-group row">
-                <label for="stockName" class="col-sm-2 col-form-label">name</label>
-                <div class="col-sm-10">
-                <input type="text" class="form-control" id="stockName" placeholder="name">
-                </div>
-                </div>
-                <div class="form-group row">
-                <label for="stockQty" class="col-sm-2 col-form-label">quantity</label>
-                <div class="col-sm-10">
-                <input type="text" class="form-control" id="stockQty" placeholder="quantity">
-                </div>
-                </div>
-                <div class="form-group row">
-                <label for="pDay" class="col-sm-2 col-form-label">Purchase Day</label>
-                <div class="col-sm-10">
-                <input type="email" class="form-control" id="pDay" placeholder="in day">
-                </div>
-                </div>
-                <div class="form-group row">
-                <label for="stockName" class="col-sm-2 col-form-label">name</label>
-                <div class="col-sm-10">
-                <input type="email" class="form-control" id="stockName" placeholder="name">
-                </div>
-                </div>
-                <div class="form-group row">
-                <label for="stockName" class="col-sm-2 col-form-label">name</label>
-                <div class="col-sm-10">
-                <input type="email" class="form-control" id="stockName" placeholder="name">
-                </div>
-                </div>
-                <div class="form-group row">
-                <label for="stockName" class="col-sm-2 col-form-label">name</label>
-                <div class="col-sm-10">
-                <input type="email" class="form-control" id="stockName" placeholder="name">
-                </div>
-                </div>
-                
-                  <div class="form-group">
-                  <input type='file' accept="image/jpeg"id="imgInp" name="stock_photo"/>
-                  <img id="blah" src="#" alt="image" onload="resizeToMax(this.id)" />
-                  </div>
-                  <div class="form-group mb-0">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1">                  
-                      <label class="custom-control-label" for="exampleCheck1">I agree to the <a href="#">terms of service</a>.</label>
-                    </div>
-                  </div>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>            
-</form>    
+  
 <?php require_once('../../../private/shared/cmn_scripts.php'); ?>  
 <script type="text/javascript">
 $(document).ready(function () {
@@ -175,9 +128,7 @@ function resizeToMax(id){
         img.style.height = "50rem";
     }
 }
-$(".datepicker").datepicker({
-            uiLibrary: 'bootstrap4'
-        });
+
 $("#imgInp").change(function() {
   readURL(this);
 });

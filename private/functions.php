@@ -10,16 +10,33 @@ function url_for($script_path) {
 
 function find_all_items($options=[]) {
   global $db;
-
   $tb_name = $options['tb_name'] ?? '';
+  // echo();
   $sql = "SELECT * FROM ";
   $sql .= $tb_name;  
-  $sql .= " ORDER BY position ASC";
+  $sql .= " ORDER BY name ASC";
   //echo $sql;
   $result = mysqli_query($db, $sql);
   confirm_result_set($result);
   return $result;
 }
+
+// function find_all_items_on_date($options=[]){
+//   global $db;
+//   $tb_name = $options['tb_name'] ?? '';
+//   $tgt_date = $options['target_date'] ?? '';
+//   // echo();
+//   $sql = "SELECT * FROM ";
+//   $sql .= $tb_name; 
+//   $sql .= " WHERE date is like % "
+//   $sql .= $tgt_date;
+//   $sql .= " % " 
+//   $sql .= "ORDER BY name ASC";
+//   //echo $sql;
+//   $result = mysqli_query($db, $sql);
+//   confirm_result_set($result);
+//   return $result;
+// }
 
 function is_post_request() {
     return $_SERVER['REQUEST_METHOD'] == 'POST';

@@ -1,56 +1,51 @@
-<?php 
-require_once('../private/initialize.php'); 
+<?php
+require_once '../private/initialize.php';
 
-$errors = [];   
+$errors = [];
 $username = '';
 $password = '';
 
-if(is_post_request()) {
+if (is_post_request()) {
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-  $username = $_POST['username'] ?? '';
-  $password = $_POST['password'] ?? '';
-
-  // Validations
-  if(is_blank($username)) {
-    $errors[] = "Username cannot be blank.";
-  }
-  if(is_blank($password)) {
-    $errors[] = "Password cannot be blank.";
-  }
-
-  // if there were no errors, try to login
-  if(empty($errors)) {
-    // Using one variable ensures that msg is the same
-    $login_failure_msg = "Log in was unsuccessful.";
-
-    $admin = find_admin_by_username($username);
-    if($admin) {
-
-      if(password_verify($password, $admin['hashed_password'])) {
-        // password matches
-        log_in_admin($admin);
-        redirect_to(url_for('/staff/index.php'));
-      } else {
-        // username found, but password does not match
-        $errors[] = $login_failure_msg;
-      }
-
-    } else {
-      // no username found
-      $errors[] = $login_failure_msg;
+    // Validations
+    if (is_blank($username)) {
+        $errors[] = 'Username cannot be blank.';
+    }
+    if (is_blank($password)) {
+        $errors[] = 'Password cannot be blank.';
     }
 
-  }
+    // if there were no errors, try to login
+    if (empty($errors)) {
+        // Using one variable ensures that msg is the same
+        $login_failure_msg = 'Log in was unsuccessful.';
 
+        $admin = find_admin_by_username($username);
+        if ($admin) {
+            if (password_verify($password, $admin['password'])) {
+                // password matches
+                log_in_admin($admin);
+                redirect_to(url_for('/staff/cashier/new.php'));
+            } else {
+                // username found, but password does not match
+                $errors[] = $login_failure_msg;
+            }
+        } else {
+            // no username found
+            $errors[] = $login_failure_msg;
+        }
+    }
 }
- 
+
 ?>
 
 <!DOCTYPE html>
 <html>
   <head>   
     <title>VelvetPOS | Log in</title>
-    <?php require_once('../private/shared/commn_header_links.php'); ?>
+    <?php require_once '../private/shared/commn_header_links.php'; ?>
   </head>
 
   <body class="hold-transition login-page">
@@ -65,7 +60,7 @@ if(is_post_request()) {
 
           <form action="index.php" method="post">
             <div class="input-group mb-3">
-              <input type="email" class="form-control" placeholder="Email" />
+              <input type="text" class="form-control" name="username" placeholder="username" />
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-envelope"></span>
@@ -74,6 +69,7 @@ if(is_post_request()) {
             </div>
             <div class="input-group mb-3">
               <input
+              name="password"
                 type="password"
                 class="form-control"
                 placeholder="Password"
@@ -127,6 +123,6 @@ if(is_post_request()) {
       </div>
     </div>
     <!-- /.login-box -->
-    <?php require_once('../private/shared/cmn_scripts.php'); ?>
+    <?php require_once '../private/shared/cmn_scripts.php'; ?>
   </body>
 </html>

@@ -75,4 +75,6 @@
 <script src="../../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 
   
-
+<script src=<?php echo(url_for("plugins/chart.js/Chart.min.js"))?>></script>
+<script src=<?php echo(url_for("dist/js/demo.js"))?>></script>
+<script src=<?php echo(url_for("dist/js/pages/dashboard3.js"))?>></script>

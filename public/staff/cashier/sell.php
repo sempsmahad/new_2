@@ -1,4 +1,8 @@
-<?php require_once '../../../private/initialize.php'; ?>
+<?php 
+require_once('../../../private/initialize.php');
+require_cashier_login();
+ $user = find_user_by_id($_SESSION['user_id']); 
+?>
     <?php
 $item_names = [];
 $item_ids = [];
@@ -47,6 +51,12 @@ while ($stock_item = mysqli_fetch_assoc($stock_items)) {
 
         <body>
             <div class="wrapper">
+                 <!-- Navbar -->
+        <?php require_once '../../../private/shared/nav_bar_cashier.php'; ?>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <?php require_once '../../../private/shared/side_bar_cashier.php'; ?>
 
                 <div class="content-wrapper">
                     <section class="content-header">
@@ -186,7 +196,7 @@ while ($stock_item = mysqli_fetch_assoc($stock_items)) {
                         rowString += '</td><td><div>';
                         rowString += quantity;
                         rowString += '</div></td><td><span class="badge bg-primary">'
-                        rowString += tt;
+                        rowString += Number(tt).toLocaleString();
                         rowString += currencySymbol;
                         rowString += '</span></td></tr>';
                         tbody.insertAdjacentHTML('afterbegin', rowString);

@@ -1,19 +1,22 @@
-<?php require_once('../../../private/initialize.php');  ?>
+<?php 
+require_once('../../../private/initialize.php');
+require_manager_login();
+?>
 <!DOCTYPE html>
 <html>
 
 <head>
-<?php require_once('../../../private/shared/commn_header_links.php'); ?>  
+<?php require_once '../../../private/shared/commn_header_links.php'; ?>  
     <title>VelvetPOS | preferences</title>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <!-- Navbar -->
-        <?php require_once('../../../private/shared/nav_bar_admin.php'); ?>
+        <?php require_once '../../../private/shared/nav_bar_manager.php'; ?>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
-        <?php require_once('../../../private/shared/side_bar_admin.php'); ?>
+        <?php require_once '../../../private/shared/side_bar_manager.php'; ?>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -81,7 +84,7 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <?php require_once('../../../private/shared/footer_admin.php'); ?>
+        <?php require_once '../../../private/shared/footer_admin.php'; ?>
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
@@ -89,7 +92,7 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
-    <?php require_once('../../../private/shared/cmn_scripts.php'); ?>
+    <?php require_once '../../../private/shared/cmn_scripts.php'; ?>
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>    

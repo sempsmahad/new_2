@@ -1,3 +1,7 @@
+<?php 
+require_once('../../../private/initialize.php');
+require_cashier_login();
+?>
 <!DOCTYPE html>
 <html lang="en">
 

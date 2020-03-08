@@ -1,4 +1,7 @@
-<?php require_once('../../../private/initialize.php');  ?>
+<?php 
+require_once('../../../private/initialize.php');
+require_manager_login();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

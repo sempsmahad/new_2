@@ -26,11 +26,9 @@
 
 
 
-                        
-
                         <li class="nav-item">
-                            <a href="admin.php" class="nav-link <?=echoActiveClassIfRequestMatches("admin")?>">
-                                <i class="nav-icon fa fa-pie-chart"></i>
+                            <a href="index.php" class="nav-link <?=echoActiveClassIfRequestMatches("index")?>">
+                                <i class="nav-icon fa fa-area-chart"></i>
                                 <p>
                                     Dashboard
                                 </p>
@@ -38,13 +36,12 @@
                         </li>
                         <li class="nav-item">
                             <a href="cashier.php" class="nav-link <?=echoActiveClassIfRequestMatches("cashier")?>">
-                                <i class="nav-icon fa fa-users"></i>
+                                <i class="nav-icon fa fa-money"></i>
                                 <p>
-                                    Users
+                                    Cashiers
                                 </p>
                             </a>
-                        </li>
-                       
+                        </li> 
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

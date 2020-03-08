@@ -1,6 +1,8 @@
 <?php
 require_once '../../../private/initialize.php';
-require_login();
+require_cashier_login();
+$user = find_user_by_id($_SESSION['user_id']);
+
 $item_names = [];
 $item_ids = [];
 $item_prices = [];
@@ -13,8 +15,8 @@ while ($stock_item = mysqli_fetch_assoc($stock_items)) {
     array_push($item_ids, $stock_item['id']);
     array_push($item_prices, $stock_item['sale_price']);
 }
-while ($user = mysqli_fetch_assoc($users)) {
-    array_push($affiliations, $user['affiliation']);
+while ($user0 = mysqli_fetch_assoc($users)) {
+    array_push($affiliations, $user0['affiliation']);
 }
 ?>
     <!DOCTYPE html>
@@ -115,6 +117,12 @@ while ($user = mysqli_fetch_assoc($users)) {
 
     <body>
     <div class="wrapper">
+            <!-- Navbar -->
+            <?php require_once '../../../private/shared/nav_bar_cashier.php'; ?>
+        <!-- /.navbar -->
+           <!-- Main Sidebar Container -->
+           <?php require_once '../../../private/shared/side_bar_cashier.php'; ?>
+
                 <div class="content-wrapper">
                     <section class="content-header">
                     </section>

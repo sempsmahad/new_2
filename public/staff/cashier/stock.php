@@ -1,4 +1,8 @@
-<?php require_once '../../../private/initialize.php'; ?>
+<?php 
+require_once('../../../private/initialize.php');
+require_cashier_login();
+$user = find_user_by_id($_SESSION['user_id']); 
+?>
     <?php
 
 if (is_post_request()) {
@@ -46,6 +50,11 @@ if (is_post_request()) {
 
         <body>
             <div class="wrapper">
+              <!-- Navbar -->
+        <?php require_once '../../../private/shared/nav_bar_cashier.php'; ?>
+        <!-- /.navbar -->
+           <!-- Main Sidebar Container -->
+           <?php require_once '../../../private/shared/side_bar_cashier.php'; ?>
                 <div class="content-wrapper">
                     <section class="content-header">
                     </section>

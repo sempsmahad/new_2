@@ -10,7 +10,7 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
+                    <div class="image">
                         <img src=<?php echo url_for('images/'.raw_u($user['username']).'.jpg'); ?> class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
@@ -26,25 +26,31 @@
 
 
 
-                        
-
                         <li class="nav-item">
-                            <a href="admin.php" class="nav-link <?=echoActiveClassIfRequestMatches("admin")?>">
-                                <i class="nav-icon fa fa-pie-chart"></i>
+                            <a href="index.php" class="nav-link <?=echoActiveClassIfRequestMatches("index")?>">
+                                <i class="nav-icon fa fa-line-chart"></i>
                                 <p>
                                     Dashboard
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="cashier.php" class="nav-link <?=echoActiveClassIfRequestMatches("cashier")?>">
-                                <i class="nav-icon fa fa-users"></i>
+                            <a href="sell.php" class="nav-link <?=echoActiveClassIfRequestMatches("sell")?>">
+                                <i class="nav-icon fa fa-bitcoin"></i>
                                 <p>
-                                    Users
+                                    Sell
+                                </p>
+                            </a>
+                        </li>                   
+                     
+                        <li class="nav-item">
+                            <a href="stock.php" class="nav-link <?=echoActiveClassIfRequestMatches("stock")?>">
+                                <i class="nav-icon fa fa-cubes"></i>
+                                <p>
+                                    Stock
                                 </p>
                             </a>
                         </li>
-                       
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

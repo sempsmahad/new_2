@@ -1,4 +1,8 @@
-<?php require_once('../../../private/initialize.php');  ?>
+<?php 
+require_once('../../../private/initialize.php');
+require_admin_login();
+$user = find_user_by_id($_SESSION['user_id']); 
+?>
 <!DOCTYPE html>
 <html>
 

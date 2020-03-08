@@ -1,9 +1,13 @@
-<?php require_once('../../../private/initialize.php');  ?>
+<?php 
+require_once('../../../private/initialize.php');
+require_manager_login();
+$user = find_user_by_id($_SESSION['user_id']); 
+?>
 <!DOCTYPE html>
 <html>
 
 <head>
-<?php require_once('../../../private/shared/commn_header_links.php'); ?>
+<?php require_once '../../../private/shared/commn_header_links.php'; ?>
     <title>VelvetPOS | cashiers</title>
     
 </head>
@@ -12,11 +16,11 @@
     <div class="wrapper">
 
         <!-- Navbar -->
-        <?php require_once('../../../private/shared/nav_bar_admin.php'); ?>
+        <?php require_once '../../../private/shared/nav_bar_manager.php'; ?>
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php require_once('../../../private/shared/side_bar_admin.php'); ?>
+        <?php require_once '../../../private/shared/side_bar_manager.php'; ?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -488,7 +492,7 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <?php require_once('../../../private/shared/footer_admin.php'); ?>
+        <?php require_once '../../../private/shared/footer_admin.php'; ?>
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
@@ -501,7 +505,7 @@
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>    
-    <?php require_once('../../../private/shared/cmn_scripts.php'); ?>
+    <?php require_once '../../../private/shared/cmn_scripts.php'; ?>
     <script>
         $(function() {
             $("#adminTable1").DataTable();

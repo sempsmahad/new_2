@@ -12,7 +12,7 @@
         Create User
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href=<?php echo(url_for('/staff/create_user.php'))?>>Admin</a>
+          <a class="dropdown-item" href=<?php echo(url_for('/staff/admin/new.php'))?>>Admin</a>
           <a class="dropdown-item" href=<?php echo(url_for('/staff/manager/new.php'))?>>manager</a>
           <a class="dropdown-item" href=<?php echo(url_for('/staff/cashier/new.php'))?>>cashier</a>          
         </div>
@@ -120,7 +120,7 @@
                         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                     </div>
                 </li>
-                <li class="nav-item">                
+                <li class="nav-item">
                     <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
                         <i class="fas fa-th-large"></i>
                     </a>

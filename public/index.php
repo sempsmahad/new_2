@@ -5,7 +5,9 @@ $errors = [];
 $username = '';
 $password = '';
 
-if (is_post_request()) {
+if (is_logged_in()) {
+    redirect_to(url_for('/staff/'.$_SESSION['user_type'].'/index.php'));
+} elseif (is_post_request()) {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
@@ -22,12 +24,12 @@ if (is_post_request()) {
         // Using one variable ensures that msg is the same
         $login_failure_msg = 'Log in was unsuccessful.';
 
-        $admin = find_admin_by_username($username);
-        if ($admin) {
-            if (password_verify($password, $admin['password'])) {
+        $user = find_user_by_username($username);
+        if ($user) {
+            if (password_verify($password, $user['password'])) {
                 // password matches
-                log_in_admin($admin);
-                redirect_to(url_for('/staff/cashier/new.php'));
+                log_in_user($user);
+                redirect_to(url_for('/staff/'.$user['type'].'/index.php'));
             } else {
                 // username found, but password does not match
                 $errors[] = $login_failure_msg;

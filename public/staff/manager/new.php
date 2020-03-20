@@ -7,7 +7,7 @@ require_manager_login();
 <head>
 <?php require_once('../../../private/shared/commn_header_links.php'); ?> 
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
 <form action="new.php" method="post">
 <div class="card-body">
 <div class="form-group row">

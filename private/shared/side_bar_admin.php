@@ -11,7 +11,12 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                        <img src=<?php echo url_for('images/'.raw_u($user['username']).'.jpg'); ?> class="img-circle elevation-2" alt="User Image">
+                        <img src=
+                        <?php if($user['image']!==""){?>
+                            <?php echo url_for($user['image']); ?> class="img-circle elevation-2" alt="User Image">
+                        <?php }else{?>  
+                            <?php echo url_for("images/avatar.png"); ?> class="img-circle elevation-2" alt="User Image">               
+                            <?php }?> 
                     </div>
                     <div class="info">
                         <a href="#" class="d-block"><?php echo $user['username'].' ('.$user['type'].')'; ?></a>
@@ -29,7 +34,7 @@
                         
 
                         <li class="nav-item">
-                            <a href="admin.php" class="nav-link <?=echoActiveClassIfRequestMatches("admin")?>">
+                            <a href=<?php echo url_for("staff/admin/index.php")?> class="nav-link <?=echoActiveClassIfRequestMatches("admin")?>">
                                 <i class="nav-icon fa fa-pie-chart"></i>
                                 <p>
                                     Dashboard
@@ -37,7 +42,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="cashier.php" class="nav-link <?=echoActiveClassIfRequestMatches("cashier")?>">
+                            <a href=<?php echo url_for("staff/admin/index.php")?>  class="nav-link <?=echoActiveClassIfRequestMatches("cashier")?>">
                                 <i class="nav-icon fa fa-users"></i>
                                 <p>
                                     Users

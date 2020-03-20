@@ -10,7 +10,7 @@ require_manager_login();
     <title>VelvetPOS | preferences</title>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
     <div class="wrapper">
         <!-- Navbar -->
         <?php require_once '../../../private/shared/nav_bar_manager.php'; ?>

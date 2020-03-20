@@ -98,7 +98,7 @@ require_cashier_login();
     </style>
 </head>
 
-<body>
+<body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
     <div class="container">
         <h1>jQuery Image Upload 
         <small>with preview</small>

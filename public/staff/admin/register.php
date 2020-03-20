@@ -32,7 +32,7 @@ require_admin_login();
     />
   </head>
 
-  <body class="hold-transition register-page">
+  <body class="hold-transition register-page layout-navbar-fixed layout-fixed" ">
     <div class="register-box">
       <div class="register-logo">
         <a href="../../index2.php"><b>Velvet</b>POS</a>

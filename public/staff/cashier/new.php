@@ -115,7 +115,7 @@ while ($user0 = mysqli_fetch_assoc($users)) {
 
     </head>
 
-    <body>
+    <body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
     <div class="wrapper">
             <!-- Navbar -->
             <?php require_once '../../../private/shared/nav_bar_cashier.php'; ?>

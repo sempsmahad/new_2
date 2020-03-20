@@ -1,7 +1,12 @@
 <?php
-require_once '../../private/initialize.php';
+require_once '../../../private/initialize.php';
 require_login();
 $user = find_user_by_id($_SESSION['user_id']);
+
+if(!isset($_GET['id'])) {
+   redirect_to(url_for('/staff/admin/index.php'));
+ }
+ $id = $_GET['id'];
 
 if (is_post_request()) {
 //     echo "<pre>";
@@ -10,6 +15,7 @@ if (is_post_request()) {
     // echo"<hr />";
     $now = new DateTime();
     $cur_user = [];
+    $cur_user['id'] = $id;
     $cur_user['first_name'] = $_POST['first_name'] ?? '';
     $cur_user['last_name'] = $_POST['last_name'] ?? '';
     $cur_user['email'] = $_POST['email'] ?? '';
@@ -20,23 +26,15 @@ if (is_post_request()) {
     $cur_user['password'] = $_POST['password'] ?? '';
     $cur_user['confirm_password'] = $_POST['confirm_password'] ?? '';
 
-    $result = insert_user($cur_user);
+    $result = update_user($cur_user);
     if ($result === true) {
-        $_SESSION['message'] = 'user created.';
-        redirect_to(url_for('/staff/admin/index.php'));
+        $_SESSION['message'] = 'user updated.';
+        redirect_to(url_for('/staff/admin/show.php?id=' . $id));
     } else {
         $errors = $result;
     }
 } else {
-    // display the blank form
-    $cur_user = [];
-    $cur_user['first_name'] = '';
-    $cur_user['last_name'] = '';
-    $cur_user['email'] = '';
-    $cur_user['type'] = '';
-    $cur_user['username'] = '';
-    $cur_user['password'] = '';
-    $cur_user['confirm_password'] = '';
+   $cur_user = find_user_by_id($id);
 }
 
 $item_names = [];
@@ -61,7 +59,7 @@ while ($user0 = mysqli_fetch_assoc($users)) {
 
 <head>
 
-    <?php require_once '../../private/shared/commn_header_links.php'; ?>
+    <?php require_once '../../../private/shared/commn_header_links.php'; ?>
 
     <style>
         .container {
@@ -155,10 +153,10 @@ while ($user0 = mysqli_fetch_assoc($users)) {
 <body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
     <div class="wrapper">
         <!-- Navbar -->
-        <?php require_once '../../private/shared/nav_bar_admin.php'; ?>
+        <?php require_once '../../../private/shared/nav_bar_admin.php'; ?>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
-        <?php require_once '../../private/shared/side_bar_admin.php'; ?>
+        <?php require_once '../../../private/shared/side_bar_admin.php'; ?>
 
         <div class="content-wrapper">
             <section class="content-header">
@@ -170,8 +168,7 @@ while ($user0 = mysqli_fetch_assoc($users)) {
                         <div class="card-body">
                         <?php echo display_errors($errors); ?>
                             <form role="form" action="create_user.php" enctype="multipart/form-data" method="POST">
-                            <input type="hidden" name="MAX_FILE_SIZE" value="10000000">
-                            
+                            <input type="hidden" name="MAX_FILE_SIZE" value="10000000">                            
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <div class="form-group">
@@ -182,7 +179,12 @@ while ($user0 = mysqli_fetch_assoc($users)) {
                                                 </div>
                                                 <div class="avatar-preview">
                                                     <div id="imagePreview"
-                                                        style="background-image: url(https://api.adorable.io/avatars/500/abott@adorable.png);">
+                                                    style="background-image: url(<?php if($cur_user['image']!==""){
+                                                        echo url_for($cur_user['image']);
+                                                    }else{
+                                                      echo url_for("images/avatar.png");
+                                                      }?>
+                                                   );">
                                                     </div>
                                                 </div>
                                             </div>
@@ -195,28 +197,28 @@ while ($user0 = mysqli_fetch_assoc($users)) {
                                                     Name</label>
                                                 <div class="col-sm-5">
                                                     <input type="text" class="form-control" name="first_name" id="FirstName"
-                                                        placeholder="First Name">
+                                                        placeholder="First Name" value="<?php echo h($cur_user['first_name']); ?>">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="LastName" class="col-sm-2 col-form-label">Last Name</label>
                                                 <div class="col-sm-5">
                                                     <input type="text" class="form-control" name="last_name" id="LastName"
-                                                        placeholder="Last Name">
+                                                        placeholder="Last Name" value="<?php echo h($cur_user['last_name']); ?>">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="UserName" class="col-sm-2 col-form-label">Email</label>
                                                 <div class="col-sm-5">
                                                     <input type="email" class="form-control" name="email" id="email"
-                                                        placeholder="email">
+                                                        placeholder="email" value="<?php echo h($cur_user['email']); ?>">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="UserName" class="col-sm-2 col-form-label">UserName</label>
                                                 <div class="col-sm-5">
                                                     <input type="text" class="form-control" name="username" id="UserName"
-                                                        placeholder="name">
+                                                        placeholder="name" value="<?php echo h($cur_user['username']); ?>">
                                                 </div>
                                             </div>
 
@@ -238,7 +240,7 @@ while ($user0 = mysqli_fetch_assoc($users)) {
                                                 <label for="password" class="col-sm-2 col-form-label">password</label>
                                                 <div class="col-sm-5">
                                                     <input type="password" name="password" class="form-control" id="password"
-                                                        placeholder="password">
+                                                        placeholder="password" value="">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -246,7 +248,7 @@ while ($user0 = mysqli_fetch_assoc($users)) {
                                                     password</label>
                                                 <div class="col-sm-5">
                                                     <input type="password" name="confirm_password" class="form-control" id="confirm_password"
-                                                        placeholder="confirm password">
+                                                        placeholder="confirm password" value="">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -255,9 +257,9 @@ while ($user0 = mysqli_fetch_assoc($users)) {
                                                     <select id="Type" name="type" class="form-control select2bs4"
                                                         style="width: 100%;">
 
-                                                        <option>admin</option>
-                                                        <option>manager</option>
-                                                        <option>cashier</option>
+                                                        <option <?php if($cur_user['type']==="admin"){echo 'selected';}?>>admin</option>
+                                                        <option <?php if($cur_user['type']==="manager"){echo 'selected';}?>>manager</option>
+                                                        <option <?php if($cur_user['type']==="cashier"){echo 'selected';}?>>cashier</option>
 
                                                     </select>
                                                 </div>
@@ -277,7 +279,7 @@ while ($user0 = mysqli_fetch_assoc($users)) {
         </div>
     </div>
 
-    <?php require_once '../../private/shared/cmn_scripts.php'; ?>
+    <?php require_once '../../../private/shared/cmn_scripts.php'; ?>
     <script>
         $(function () {
 

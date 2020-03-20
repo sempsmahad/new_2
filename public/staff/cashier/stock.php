@@ -48,7 +48,7 @@ if (is_post_request()) {
             <?php require_once '../../../private/shared/commn_header_links.php'; ?>
         </head>
 
-        <body>
+        <body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
             <div class="wrapper">
               <!-- Navbar -->
         <?php require_once '../../../private/shared/nav_bar_cashier.php'; ?>

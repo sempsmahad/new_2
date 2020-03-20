@@ -94,7 +94,6 @@ function find_all_items($options = [])
 {
     global $db;
     $tb_name = $options['tb_name'] ?? '';
-    $limit = $options['limit'] ?? '';
     // echo();
     $sql = 'SELECT * FROM ';
     $sql .= $tb_name;
@@ -157,13 +156,14 @@ function find_user_by_id($id)
   }
  // Performs all actions necessary to log in an admin
 
- function require_login() {
-    if(!is_logged_in()) {
-        redirect_to(url_for('/index.php'));
-    } else {
-      // Do nothing, let the rest of the page proceed
-    }
-  }
+ function require_login()
+ {
+     if (!is_logged_in()) {
+         redirect_to(url_for('/index.php'));
+     } else {
+         // Do nothing, let the rest of the page proceed
+     }
+ }
     function is_blank($value)
     {
         return !isset($value) || trim($value) === '';
@@ -173,6 +173,176 @@ function find_user_by_id($id)
         header('Location: '.$location);
         exit;
     }
+
+    function insert_user($user)
+    {
+        global $db;
+
+        $tmp_image = $_FILES['image_upload']['tmp_name'];
+        $upload_dir = '../images';
+        $target_image = $user['username'].'_'.$user['join_date'].'.jpg';      
+
+        $errors = validate_user($user);
+        if (!empty($errors)) {
+            return $errors;
+        }
+
+        $hashed_password = password_hash($user['password'], PASSWORD_BCRYPT);
+        $image_name = 'images/'.$target_image;
+
+        $sql = 'INSERT INTO users ';
+        $sql .= '(first_name, last_name, email, username, password,type,affiliation,image,join_date) ';
+        $sql .= 'VALUES (';
+        $sql .= "'".db_escape($db, $user['first_name'])."',";
+        $sql .= "'".db_escape($db, $user['last_name'])."',";
+        $sql .= "'".db_escape($db, $user['email'])."',";
+        $sql .= "'".db_escape($db, $user['username'])."',";
+        $sql .= "'".db_escape($db, $hashed_password)."',";
+        $sql .= "'".db_escape($db, $user['type'])."',";
+        $sql .= "'".db_escape($db, $user['affiliation'])."',";
+        $sql .= "'".db_escape($db, $image_name)."',";
+        $sql .= "'".db_escape($db, $user['join_date'])."'";
+        $sql .= ')';
+        $result = mysqli_query($db, $sql);
+
+        // For INSERT statements, $result is true/false
+        if ($result) {
+            if (move_uploaded_file($tmp_image, $upload_dir.'/'.$target_image)) {
+            } else {
+                $errors = $_FILES['image_upload']['error'].' failed to upload';
+            }
+            return true;
+        } else {
+            // INSERT failed
+            echo mysqli_error($db);
+            db_disconnect($db);
+            exit;
+        }
+    }
+
+      function validate_user($user, $options = [])
+      {
+          $password_required = $options['password_required'] ?? true;
+
+          if (is_blank($user['first_name'])) {
+              $errors[] = 'First name cannot be blank.';
+          } elseif (!has_length($user['first_name'], array('min' => 2, 'max' => 255))) {
+              $errors[] = 'First name must be between 2 and 255 characters.';
+          }
+
+          if (is_blank($user['last_name'])) {
+              $errors[] = 'Last name cannot be blank.';
+          } elseif (!has_length($user['last_name'], array('min' => 2, 'max' => 255))) {
+              $errors[] = 'Last name must be between 2 and 255 characters.';
+          }
+
+          if (is_blank($user['email'])) {
+              $errors[] = 'Email cannot be blank.';
+          } elseif (!has_length($user['email'], array('max' => 255))) {
+              $errors[] = 'Last name must be less than 255 characters.';
+          } elseif (!has_valid_email_format($user['email'])) {
+              $errors[] = 'Email must be a valid format.';
+          }
+
+          if (is_blank($user['username'])) {
+              $errors[] = 'Username cannot be blank.';
+          } elseif (!has_length($user['username'], array('min' => 8, 'max' => 255))) {
+              $errors[] = 'Username must be between 8 and 255 characters.';
+          } elseif (!has_unique_username($user['username'], $user['id'] ?? 0)) {
+              $errors[] = 'Username not allowed. Try another.';
+          }
+
+          //   if ($password_required) {
+          //       if (is_blank($user['password'])) {
+          //           $errors[] = 'Password cannot be blank.';
+          //       } elseif (!has_length($user['password'], array('min' => 12))) {
+          //           $errors[] = 'Password must contain 12 or more characters';
+          //       } elseif (!preg_match('/[A-Z]/', $user['password'])) {
+          //           $errors[] = 'Password must contain at least 1 uppercase letter';
+          //       } elseif (!preg_match('/[a-z]/', $user['password'])) {
+          //           $errors[] = 'Password must contain at least 1 lowercase letter';
+          //       } elseif (!preg_match('/[0-9]/', $user['password'])) {
+          //           $errors[] = 'Password must contain at least 1 number';
+          //       } elseif (!preg_match('/[^A-Za-z0-9\s]/', $user['password'])) {
+          //           $errors[] = 'Password must contain at least 1 symbol';
+          //       }
+
+          //       if (is_blank($user['confirm_password'])) {
+          //           $errors[] = 'Confirm password cannot be blank.';
+          //       } elseif ($user['password'] !== $user['confirm_password']) {
+          //           $errors[] = 'Password and confirm password must match.';
+          //       }
+          //   }
+
+          return $errors;
+      }
+      function has_valid_email_format($value)
+      {
+          $email_regex = '/\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\Z/i';
+
+          return preg_match($email_regex, $value) === 1;
+      }
+      function display_errors($errors = array())
+      {
+          $output = '';
+          if (!empty($errors)) {
+              $output .= '<div class="errors">';
+              $output .= 'Please fix the following errors:';
+              $output .= '<ul>';
+              foreach ($errors as $error) {
+                  $output .= '<li>'.h($error).'</li>';
+              }
+              $output .= '</ul>';
+              $output .= '</div>';
+          }
+
+          return $output;
+      }
+      function has_length($value, $options)
+      {
+          if (isset($options['min']) && !has_length_greater_than($value, $options['min'] - 1)) {
+              return false;
+          } elseif (isset($options['max']) && !has_length_less_than($value, $options['max'] + 1)) {
+              return false;
+          } elseif (isset($options['exact']) && !has_length_exactly($value, $options['exact'])) {
+              return false;
+          } else {
+              return true;
+          }
+      }
+
+      function has_unique_username($username, $current_id = '0')
+      {
+          global $db;
+
+          $sql = 'SELECT * FROM users ';
+          $sql .= "WHERE username='".db_escape($db, $username)."' ";
+          $sql .= "AND id != '".db_escape($db, $current_id)."'";
+
+          $result = mysqli_query($db, $sql);
+          $user_count = mysqli_num_rows($result);
+          mysqli_free_result($result);
+
+          return $user_count === 0;
+      }
+      function has_length_exactly($value, $exact)
+      {
+          $length = strlen($value);
+
+          return $length == $exact;
+      }
+      function has_length_less_than($value, $max)
+      {
+          $length = strlen($value);
+
+          return $length < $max;
+      }
+      function has_length_greater_than($value, $min)
+      {
+          $length = strlen($value);
+
+          return $length > $min;
+      }
 
     function insert_stock($stock)
     {

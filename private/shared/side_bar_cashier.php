@@ -1,5 +1,5 @@
 
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-4 ">
             <!-- Brand Logo -->
             <a href="index3.php" class="brand-link">
                 <img src=<?php echo url_for('dist/img/AdminLTELogo.png'); ?> alt="VelvetPOS Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -11,7 +11,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src=<?php echo url_for('images/'.raw_u($user['username']).'.jpg'); ?> class="img-circle elevation-2" alt="User Image">
+                        <img src=<?php echo url_for($user['image']); ?> class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block"><?php echo $user['username'].' ('.$user['type'].')'; ?></a>

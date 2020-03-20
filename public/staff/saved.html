@@ -3,42 +3,6 @@ require_once '../../private/initialize.php';
 require_login();
 $user = find_user_by_id($_SESSION['user_id']);
 
-if (is_post_request()) {
-//     echo "<pre>";
-    // print_r($_FILES['image_upload']);
-    // echo"</pre>";
-    // echo"<hr />";
-    $now = new DateTime();
-    $cur_user = [];
-    $cur_user['first_name'] = $_POST['first_name'] ?? '';
-    $cur_user['last_name'] = $_POST['last_name'] ?? '';
-    $cur_user['email'] = $_POST['email'] ?? '';
-    $cur_user['username'] = $_POST['username'] ?? '';
-    $cur_user['type'] = $_POST['type'] ?? '';
-    $cur_user['join_date'] = $_POST['join_date'] ?? $now->format('Y-m-d');
-    $cur_user['affiliation'] = $_POST['affiliation'] ?? '';
-    $cur_user['password'] = $_POST['password'] ?? '';
-    $cur_user['confirm_password'] = $_POST['confirm_password'] ?? '';
-
-    $result = insert_user($cur_user);
-    if ($result === true) {
-        $_SESSION['message'] = 'user created.';
-        redirect_to(url_for('/staff/admin/index.php'));
-    } else {
-        $errors = $result;
-    }
-} else {
-    // display the blank form
-    $cur_user = [];
-    $cur_user['first_name'] = '';
-    $cur_user['last_name'] = '';
-    $cur_user['email'] = '';
-    $cur_user['type'] = '';
-    $cur_user['username'] = '';
-    $cur_user['password'] = '';
-    $cur_user['confirm_password'] = '';
-}
-
 $item_names = [];
 $item_ids = [];
 $item_prices = [];
@@ -46,7 +10,6 @@ $affiliations = [];
 $stock_items = find_all_items(['tb_name' => 'stock']);
 $users = find_all_items(['tb_name' => 'users']);
 $target_date = new DateTime();
-
 while ($stock_item = mysqli_fetch_assoc($stock_items)) {
     array_push($item_names, $stock_item['name']);
     array_push($item_ids, $stock_item['id']);
@@ -60,7 +23,6 @@ while ($user0 = mysqli_fetch_assoc($users)) {
 <html lang="en">
 
 <head>
-
     <?php require_once '../../private/shared/commn_header_links.php'; ?>
 
     <style>
@@ -168,16 +130,13 @@ while ($user0 = mysqli_fetch_assoc($users)) {
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-body">
-                        <?php echo display_errors($errors); ?>
-                            <form role="form" action="create_user.php" enctype="multipart/form-data" method="POST">
-                            <input type="hidden" name="MAX_FILE_SIZE" value="10000000">
-                            
+                            <form role="form" action="new.php" method="post">
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <div class="avatar-upload">
                                                 <div class="avatar-edit">
-                                                    <input type='file' id="imageUpload" name="image_upload" accept=".png, .jpg, .jpeg" />
+                                                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
                                                     <label for="imageUpload"></label>
                                                 </div>
                                                 <div class="avatar-preview">
@@ -194,28 +153,28 @@ while ($user0 = mysqli_fetch_assoc($users)) {
                                                 <label for="FirstName" class="col-sm-2 col-form-label">First
                                                     Name</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" name="first_name" id="FirstName"
+                                                    <input type="text" class="form-control" id="FirstName"
                                                         placeholder="First Name">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="LastName" class="col-sm-2 col-form-label">Last Name</label>
-                                                <div class="col-sm-5">
-                                                    <input type="text" class="form-control" name="last_name" id="LastName"
+                                                <div class="col-sm-7">
+                                                    <input type="text" class="form-control" id="LastName"
                                                         placeholder="Last Name">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="UserName" class="col-sm-2 col-form-label">Email</label>
-                                                <div class="col-sm-5">
-                                                    <input type="email" class="form-control" name="email" id="email"
+                                                <div class="col-sm-7">
+                                                    <input type="email" class="form-control" id="email"
                                                         placeholder="email">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="UserName" class="col-sm-2 col-form-label">UserName</label>
-                                                <div class="col-sm-5">
-                                                    <input type="text" class="form-control" name="username" id="UserName"
+                                                <div class="col-sm-7">
+                                                    <input type="text" class="form-control" id="UserName"
                                                         placeholder="name">
                                                 </div>
                                             </div>
@@ -223,49 +182,47 @@ while ($user0 = mysqli_fetch_assoc($users)) {
                                             <div class="form-group row">
                                                 <label for="Affiliation"
                                                     class="col-sm-2 col-form-label">Affiliation</label>
-                                                <div class="col-sm-5">
-                                                    <select id="Affiliation" name="Affiliation" class="form-control select2bs4"
+                                                <div class="col-sm-7">
+                                                    <select id="Affiliation" class="form-control select2bs4"
                                                         style="width: 100%;">
                                                         <?php
-                                                            foreach ($affiliations as $affiliation) {
-                                                                echo '<option>'.$affiliation.'</option>';
-                                                            }
-                                                        ?>
+                     foreach ($affiliations as $affiliation) {
+                     echo '<option>'.$affiliation.'</option>';
+                     }
+                ?>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="password" class="col-sm-2 col-form-label">password</label>
-                                                <div class="col-sm-5">
-                                                    <input type="password" name="password" class="form-control" id="password"
+                                                <div class="col-sm-7">
+                                                    <input type="password" class="form-control" id="password"
                                                         placeholder="password">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="confirm_password" class="col-sm-2 col-form-label">confirm
                                                     password</label>
-                                                <div class="col-sm-5">
-                                                    <input type="password" name="confirm_password" class="form-control" id="confirm_password"
+                                                <div class="col-sm-7">
+                                                    <input type="password" class="form-control" id="confirm_password"
                                                         placeholder="confirm password">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="Type" class="col-sm-2 col-form-label">Type</label>
-                                                <div class="col-sm-5">
-                                                    <select id="Type" name="type" class="form-control select2bs4"
+                                                <div class="col-sm-7">
+                                                    <select id="Type" class="form-control select2bs4"
                                                         style="width: 100%;">
 
-                                                        <option>admin</option>
-                                                        <option>manager</option>
-                                                        <option>cashier</option>
+                                                        <option>Admin</option>
+                                                        <option>Manager</option>
+                                                        <option>Cashier</option>
 
                                                     </select>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-block col-sm-7 bg-gradient-primary">create</button>
                                         </div>
                                     </div>
-                                   
                                 </div>
                             </form>
                         </div>
